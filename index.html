@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today Bill Count</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="xl-sheet">
+        <a href="https://docs.google.com/spreadsheets/d/1EweSs1esSO2Hc7Yk2FvKoe-gV3iCigsyHACXpl-57vc/edit#gid=0">Vew XL sheet</a>
+    </div>
+    <form name="submit-to-google-sheet">
+    <div class="allcal">
+        <div class="tandd">
+            <span id="t-date"></span>
+            <span id="t-time" style="text-decoration: underline;"></span>
+        </div>
+        <div class="todayCost">
+            <span>Cost of Today : </span><input type="number" readonly id="t-cost" value="00" name="Total">
+        </div>
+        <div class="weeklyCost">
+            <span>Weekly Cost : </span><input type="number" readonly id="w-cost" value="00">
+        </div>
+        <div class="yearlyCost">
+            <span>Show Munthly Cost</span>
+        </div>
+    </div>
+
+    <div class="munthlycal">
+        <div class="jan">
+            <span>Cost Of January : </span><input type="number" readonly id="jan-cost" value="00"><span id="jan-arr"></span>
+        </div>
+        <div class="feb">
+            <span>Cost Of February : </span><input type="number" readonly id="feb-cost" value="00"><span id="feb-arr"></span>
+        </div>
+        <div class="mar">
+            <span>Cost Of March : </span><input type="number" readonly id="mar-cost" value="00"><span id="mar-arr"></span>
+        </div>
+        <div class="apr">
+            <span>Cost Of April : </span><input type="number" readonly id="apr-cost" value="00"><span id="apr-arr"></span>
+        </div>
+        <div class="may">
+            <span>Cost Of May : </span><input type="number" readonly id="may-cost" value="00"><span id="may-arr"></span>
+        </div>
+        <div class="jun">
+            <span>Cost Of Jun : </span><input type="number" readonly id="jun-cost"><span id="jun-arr"></span>
+        </div>
+        <div class="jul">
+            <span>Cost Of July : </span><input type="number" readonly id="jul-cost" value="00"><span id="jul-arr"></span>
+        </div>
+        <div class="aug">
+            <span>Cost Of August : </span><input type="number" readonly id="aug-cost" value="00"><span id="aug-arr"></span>
+        </div>
+        <div class="sep">
+            <span>Cost Of Septembor : </span><input type="number" readonly id="sep-cost" value="00"><span id="sep-arr"></span>
+        </div>
+        <div class="oct">
+            <span>Cost Of Octobor : </span><input type="number" readonly id="oct-cost" value="00"><span id="oct-arr"></span>
+        </div>
+        <div class="nov">
+            <span>Cost Of Novembor : </span><input type="number" readonly id="nov-cost" value="00"><span id="nov-arr"></span>
+        </div>
+        <div class="dec">
+            <span>Cost Of Decembor : </span><input type="number" readonly id="dec-cost" value="00"><span id="dec-arr"></span>
+        </div>
+        <div class="total">
+            <span>Total Cost : </span><input type="number" readonly id="total-cost" value="00">
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <span>Todays Full Bill</span>
+        </div>
+        <div class="body">
+            <!-- <form action="#"> -->
+                <div class="input1">
+                    <div class="L1">
+                        <label for="lunch">Lunch : </label><br><br>
+                        <input type="text" class="lunch" id="lunch" required placeholder="Lunch">
+                    </div>
+                    <div class="L2">
+                        <label for="L-price">Price : </label><br><br>
+                        <input type="number" class="L-price" id="L-price" placeholder="$" name="Lunch">
+                    </div>
+                </div>
+                <div class="input2">
+                    <div class="S1">
+                        <label for="snacks">Snacks : </label><br><br>
+                        <input type="text" class="snacks" id="snacks" required placeholder="Snacks">
+                    </div>
+                    <div class="S2">
+                        <label for="S-price">Price : </label><br><br>
+                        <input type="number" class="S-price" id="S-price" placeholder="$" name="Snacks">
+                    </div>
+                </div>
+                <div class="input3">
+                    <div class="D1">
+                        <label for="dinner">Dinner : </label><br><br>
+                        <input type="text" class="dinner" id="dinner" required placeholder="Dinner">
+                    </div>
+                    <div class="D2">
+                        <label for="D-price">Price : </label><br><br>
+                        <input type="number" class="D-price" id="D-price" placeholder="$" name="Dinner">
+                    </div>
+                </div>
+                <div class="input4">
+                    <div class="O1">
+                        <label for="O-price">Others : </label>
+                        <input type="number" id="O-price" class="O-price" value="0" placeholder="$" name="Others">
+                    </div>
+                    <div class="O2">
+                        <input type="text" onload="todayDate()" name="Date" readonly class="t-date" id="today-date" required>
+                        <input type="text" name="Bank_Balence" class="O-price" required placeholder="Bank Balence">
+                    </div>
+                </div>
+            <!-- </form> -->
+        </div>
+        <div class="footer">
+            <input type="submit" id="submit" onclick="details()">
+        </div>
+    </div>
+    <div id="success" style="font-size: 23px; color: white; font-weight: bold; box-shadow: 1px 1px 10px grey;"></div>
+    </form>
+    <script src="script.js"></script>
+    <script>
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbw1d9_yYgkR7XLGpr8exEUqdOfr4TEP8ON88mMJL7clpAAecvWr2efiJKiXvRiiY7MF/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const success=document.getElementById("success");
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                success.innerHTML="Data successfully submited...";
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+</body>
+</html>
